@@ -833,4 +833,8 @@ d-appendix a:hover, d-appendix a.footnote-backlink:hover {
   }
 }
 
+.katex * {
+  color: var(--global-text-color) !important;
+}
+
 /*# sourceMappingURL=main.css.map */

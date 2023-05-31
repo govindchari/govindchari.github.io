@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
-  <!-- Head -->
+<!-- _layouts/distill.html --><html>
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    <!-- Metadata, OpenGraph and Schema.org -->
     
@@ -10,9 +8,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>PTR | Govind  Chari</title>
+    <title>Custom Convex Solvers | Govind  Chari</title>
     <meta name="author" content="Govind  Chari">
-    <meta name="description" content="Penalized Trust Region algorithm for minimum time-of-flight 6DOF powered descent guidance.">
+    <meta name="description" content="Why you should not use off the shelf convex solvers if you care about performance">
     <meta name="keywords" content="gnc, optimization, phd">
 
 
@@ -33,7 +31,7 @@
     <link rel="shortcut icon" href="/assets/img/favicon.png">
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="http://localhost:4000/projects/11_project/">
+    <link rel="canonical" href="http://localhost:4000/wip_posts/2023-05-09-custom-solvers/">
     
     <!-- Dark Mode -->
     
@@ -43,10 +41,65 @@
     <script src="/assets/js/dark_mode.js"></script>
     
 
+
+    <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+    <!-- Distill js -->
+    <script src="/assets/js/distillpub/template.v2.js"></script>
+    <script src="/assets/js/distillpub/transforms.v2.js"></script>
+    <script src="/assets/js/distillpub/overrides.js"></script>
+    
   </head>
 
-  <!-- Body -->
-  <body class="fixed-top-nav ">
+  <body>
+<d-front-matter>
+    <script async type="text/json">{
+      "title": "Custom Convex Solvers",
+      "description": "Why you should not use off the shelf convex solvers if you care about performance",
+      "published": "May 9, 2023",
+      "authors": [
+        {
+          "author": "Govind Chari",
+          "authorURL": "https://govindchari.com/",
+          "affiliations": [
+            {
+              "name": "University of Washington Autonomous Controls Lab",
+              "url": ""
+            }
+          ]
+        }
+        
+      ],
+      "katex": {
+        "delimiters": [
+          {
+            "left": "$",
+            "right": "$",
+            "display": false
+          },
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ]
+      }
+    }</script>
+  </d-front-matter>
+
+  
 
     <!-- Header -->
     <header>
@@ -106,63 +159,59 @@
 
 
     <!-- Content -->
-    <div class="container mt-5">
-      <!-- page.html -->
-        <div class="post">
+    <div class="post distill">
 
-          <header class="post-header">
-            <h1 class="post-title">PTR</h1>
-            <p class="post-description">Penalized Trust Region algorithm for minimum time-of-flight 6DOF powered descent guidance.</p>
-          </header>
+      <d-title>
+        <h1>Custom Convex Solvers</h1>
+        <p>Why you should not use off the shelf convex solvers if you care about performance</p>
+      </d-title>
 
-          <article>
-            <p>A Julia implementation of <a href="https://arxiv.org/pdf/1802.03827.pdf" rel="external nofollow noopener" target="_blank">Successive Convexification for 6-DoF Mars Rocket Powered Landing with Free-Final-Time</a> by Miki Szmuk and Behçet Açikmeşe. The animation on the left is a planar trajectory and the animation on the right is a recreation of SpaceX’s Starship flip maneuver. My code for this project can be found <a href="https://github.com/govindchari/PTR" rel="external nofollow noopener" target="_blank">here</a>. Some notes I wrote on PTR can be found <a href="/assets/pdf/PTR%20Walkthrough.pdf">here</a></p>
+      <d-byline></d-byline>
 
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        <figure>
+      <d-article>
+        <d-contents>
+          <nav class="l-text figcaption">
+          <h3>Contents</h3>
+            <div><a href="#introduction">Introduction</a></div>
+            
+          </nav>
+        </d-contents>
 
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/planar.gif-480.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/planar.gif-800.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/planar.gif-1400.webp"></source>
-    
+        <h2 id="introduction">Introduction</h2>
 
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/planar.gif" class="img-fluid rounded z-depth-1" width="auto" height="auto" title="example image" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+<p>Off the shelf solvers such as ECOS, SCS, Mosek, or Gurobi are good for prototyping and modest performance, but if you care about solving one problem class extremely quickly then these solvers will not give you maximum performance. In this post we will investigate a particular problem class (robust portfolio optimization) and solver (PIPG) to show how we can beat all off the shelf SOCP solvers by tuning our solver to our problem class.</p>
+<h2 id="robust-portfolio-optimization">Robust Portfolio Optimization</h2>
+<p>Formulate problem</p>
 
-  </picture>
+<p>Talk about classical case then extend to chance constraints</p>
 
-</figure>
+<p>page 216 
+https://web.stanford.edu/~boyd/papers/pdf/socp.pdf</p>
 
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        <figure>
+<h2 id="pipg">PIPG</h2>
+<p>PIPG natively handles quadratic objectives. Most SOCP solvers need to put the quadratic objective in the constraints which results in a larger KKT system to solve.</p>
 
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/starship.gif-480.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/starship.gif-800.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/starship.gif-1400.webp"></source>
-    
+<p>We will use PIPG which I have an upcoming blog post about (cite xPIPG)
+You take a step in your gradient direction augmented with the constraint gradient direction, then you do projection and dual update
+PIPG uses projections to exactly satisfy set D constraints at every iteration</p>
 
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/starship.gif" class="img-fluid rounded z-depth-1" width="auto" height="auto" title="example image" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+<p>Parse problem into PIPG canonical form</p>
 
-  </picture>
+<p>Three constraints: SOC on all of x, non-negative orthant constraints on all elements of x, and equality constraint on x
+Try putting SOC into D and no shorting into K and vice versa.</p>
 
-</figure>
+<h2 id="results">Results</h2>
+<hr>
 
-    </div>
+      </d-article>
+
+      <d-appendix>
+        <d-footnote-list></d-footnote-list>
+        <d-citation-list></d-citation-list>
+      </d-appendix>
+
+      <d-bibliography src="/assets/bibliography/mybib.bib"></d-bibliography>
 </div>
-
-
-          </article>
-
-        </div>
-
-    </div>
 
     <!-- Footer -->    
     <footer class="fixed-bottom">
@@ -172,34 +221,9 @@
       </div>
     </footer>
 
-    <!-- JavaScripts -->
-    <!-- jQuery -->
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
     <!-- Bootsrap & MDB scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha256-fgLAgv7fyCGopR/gBNq2iW3ZKIdqIcyshnUULC4vex8=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
-
-    <!-- Masonry & imagesLoaded -->
-  <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-  <script defer src="/assets/js/masonry.js" type="text/javascript"></script>
-    
-  <!-- Medium Zoom JS -->
-  <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
-  <script defer src="/assets/js/zoom.js"></script><!-- Load Common JS -->
-  <script defer src="/assets/js/common.js"></script>
-
-    <!-- MathJax -->
-  <script type="text/javascript">
-    window.MathJax = {
-      tex: {
-        tags: 'ams'
-      }
-    };
-  </script>
-  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
-  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 
     
     
@@ -281,5 +305,6 @@
   }
 </script>
 
-  </body>
+  
+</body>
 </html>

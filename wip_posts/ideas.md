@@ -10,3 +10,6 @@ Nonexpansive Operators and KM
 Stats Stuff
     - Hypothesis testing
     - Parameter estimation
+
+Solver Speed Leaderboard
+Optimization Resources

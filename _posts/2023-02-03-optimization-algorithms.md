@@ -2,7 +2,7 @@
 layout: distill
 title: Convex Solvers
 description: A survey of the different classes of solvers for convex optimization problems
-tags: math
+tags: optimization
 giscus_comments: false
 date: 2023-02-03
 

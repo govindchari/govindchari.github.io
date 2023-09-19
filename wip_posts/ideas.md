@@ -10,6 +10,7 @@ Nonexpansive Operators and KM
 Stats Stuff
     - Hypothesis testing
     - Parameter estimation
+LP Duality
 
 Solver Speed Leaderboard
 Optimization Resources

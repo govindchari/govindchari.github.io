@@ -46,7 +46,7 @@ $$
 where $A \in \mathbb{R}^{m \times n}$
 
 A first thought to solve this problem might be gradient descent, however the objective function is non-smooth (due to the l1 penalty), so we cannot use gradient descent.
-A second thought is to use subgradient descent, which is a generalization of gradient descent to non-smooth functions. This would work, but subgradient descent has an extremely slow convergence rate of $\mathcal{O}(1 / \sqrt{t})$ (meaning you need four times the iterations to double the accuracy) so we will look at better algorithms.
+A second thought is to use subgradient descent, which is a generalization of gradient descent to non-smooth functions. This would work, but subgradient descent has an extremely slow worst-case convergence rate of $\mathcal{O}(1 / \sqrt{t})$ (meaning you need four times the iterations to double the accuracy) so we will look at better algorithms.
 
 ## Reformulating as Quadratic Program
 One of the easiest things to do would be reformulating this problem as a Quadratic Program (QP) as follows:
@@ -60,7 +60,7 @@ $$
 \end{split}
 $$
 
-We can then feed this into a QP solver such as OSQP and then get an answer. This would would but it feel wasteful to turn an unconstrained problem into a constrained one and then using a generic QP solver. There should be a better way.
+We can then feed this into a QP solver such as OSQP and then get an answer. This would would but it feel wasteful to turn an unconstrained problem into a constrained one and then using a generic QP solver. There should be better algorithms that exploit the structure of our problem where we have a smooth plus a non-smooth term.
 
 ## ISTA
 ISTA or iterative shrinking threshold algorithm is an application of the proximal gradient method to the Lasso problem.
@@ -115,10 +115,12 @@ $$
 x^{k+1} = \mathcal{S}_{\lambda/L}\left(x^k - \frac{1}{L}A^\top(Ax^k-b)\right)
 $$
 
-It can be shown that this algorithm has a convergence rate of $\mathcal{O}(1 / t)$ meaning that if we double the number of iterations, we double the accuracy of the solution. This is already better than subgradient method, but is not the best we can do.
+Where $L$ is the maximum eigenvalue of $A^\topA$. This can quickly be computed via [power iteration](https://en.wikipedia.org/wiki/Power_iteration).
+
+It can be shown that this algorithm has a worst-case convergence rate of $\mathcal{O}(1 / t)$ meaning that if we double the number of iterations, we double the accuracy of the solution. This is already better than subgradient method, but is not the best we can do.
 
 ## FISTA
-ISTA was used for a while, but it can be painfully slow to converge. In 2009 Beck and Teboulle introduced FISTA (Fast Iterative Shrinking Threshold Algorithm) where they used momentum to accelerate ISTA and were able to achieve the optimal convergence rate of $\mathcal{O}(1 / t^2)$ <d-cite key="Beck2009Fast"></d-cite>.
+ISTA was used for a while, but it can be painfully slow to converge. In 2009 Beck and Teboulle introduced FISTA (Fast Iterative Shrinking Threshold Algorithm) where they used momentum to accelerate ISTA and were able to achieve the optimal worst-case convergence rate of $\mathcal{O}(1 / t^2)$ <d-cite key="Beck2009Fast"></d-cite>.
 
 ## ADMM
 

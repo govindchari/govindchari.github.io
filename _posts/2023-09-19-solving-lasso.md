@@ -206,6 +206,6 @@ The stopping criteria for all solver was coming within $0.0001$ of the optimal o
 | ISTA           | 8.880            |
 
 It should be mentioned that the ISTA, FISTA, and ADMM implementations are quite naive and unoptimized, but the OSQP solver is written is pure C.
-The slowest algorithm by far is ISTA followed by reformulating Lasso as a QP and using OSQP, followed by FISTA, and the fastest algorithm was ADMM. 
+The slowest algorithm by far is ISTA followed by reformulating Lasso as a QP and using OSQP, followed by FISTA, and the fastest algorithm was ADMM. The code to generate the plots can be found [here](https://github.com/govindchari/blog-code/tree/main/lasso).
 
 ***

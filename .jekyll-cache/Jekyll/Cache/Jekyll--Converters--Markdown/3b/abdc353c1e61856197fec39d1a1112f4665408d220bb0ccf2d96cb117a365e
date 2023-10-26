@@ -1,0 +1,37 @@
+I"Ï<h2 id="introduction">Introduction</h2>
+
+<p>Proportional Integral Projected Gradient or PIPG is a first-order primal-dual algorithm for conic optimization problems. First-order refers to the fact that PIPG only uses gradient information about the objective function at each iteration as opposed to second-order methods which use both gradient and Hessian information. As a result, PIPG requires more iteration than a second-order method to converge, but each iteration requires much less time. Primal-dual means that PIPG computes iterates of both the primal and dual variables. Conic optimization problems are the most general class of convex optimization problems.</p>
+
+<p>PIPG is also a customizable algorithm which means that although it can solve generic conic optimization problem, extra performance can be gained by tailoring the implementation to the specific problem structure at hand. Typically, PIPG has been customized to the structure of optimal control problems. The figure below which is from <d-cite key="Kamath2023Customized"></d-cite> depicts how much faster a custom implementation of PIPG with preconditioning is than an array of commercial solvers for an optimal control problem.</p>
+
+<p>INSERT ABHIâ€™S FIGURE HERE</p>
+
+<hr />
+
+<h2 id="pipg-algorithm">PIPG Algorithm</h2>
+
+<p>In this section we will constructively build an algorithm to solve inequality and equality constrained optimization problems. I would argue that PIPG might be the most intuitive optimization algorithm for optimization problems.</p>
+
+<h3 id="gradient-descent">Gradient Descent</h3>
+<p>Firstly we will consider the following optimization problem</p>
+
+<h3 id="projected-gradient-descent">Projected Gradient Descent</h3>
+<p>Only works if you have closed form projection since projection in general is another convex optimization problem</p>
+<h3 id="proportional-integral-projected-gradient">Proportional Integral Projected Gradient</h3>
+
+<p>Insert animation of a pipg iterations for a bivariate problem</p>
+
+<p>Choice of putting constraints into D or K</p>
+
+<hr />
+
+<h2 id="simulink-diagram">Simulink Diagram</h2>
+
+<h2 id="xpipg">xPIPG</h2>
+
+<p>Insert animation of xpipg iterations for a bivariate problem</p>
+
+<h2 id="customization">Customization</h2>
+
+<hr />
+:ET

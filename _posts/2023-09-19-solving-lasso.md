@@ -4,7 +4,7 @@ title:  Solving the Lasso Problem
 description: Comparing optimization algorithms for Lasso
 tags: optimization
 giscus_comments: false
-date: 2023-09-19
+date: 2023-10-25
 
 authors:
   - name: Govind Chari

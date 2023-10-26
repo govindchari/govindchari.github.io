@@ -1,6 +1,6 @@
 ---
 layout: distill
-title:  Solving Lasso Regression
+title:  Solving the Lasso Problem
 description: Comparing optimization algorithms for Lasso
 tags: optimization
 giscus_comments: false
@@ -60,7 +60,9 @@ $$
 \end{split}
 $$
 
-We can then feed this into a QP solver such as OSQP and then get an answer. This would would but it feel wasteful to turn an unconstrained problem into a constrained one and then using a generic QP solver. There should be better algorithms that exploit the structure of our problem where we have a smooth plus a non-smooth term.
+To see how this was done reference the [Mosek Modeling Cookbook](https://docs.mosek.com/modeling-cookbook/linear.html#the-ell-1-norm)
+
+We can then feed this into a QP solver such as OSQP and then get an answer. This works, but it feels wasteful to turn an unconstrained problem into a constrained one and then use a generic QP solver. There should be better algorithms that exploit the structure of our problem where we have a smooth plus a non-smooth term.
 
 ## ISTA
 ISTA or iterative shrinking threshold algorithm is an application of the proximal gradient method to the Lasso problem.
@@ -77,7 +79,7 @@ $$
 The algorithm looks as follows:
 
 $$
-x^{k+1} = \boldsymbol{\text{prox}}_{\eta g}(x^k - \eta \nabla f(x^k))
+x_{k+1} = \boldsymbol{\text{prox}}_{\eta g}(x_k - \eta \nabla f(x_k))
 $$
 
 where $\eta$ is the gradient descent stepsize for $f$ which will be the inverse of the Lipschitz constant of $f$.
@@ -112,19 +114,98 @@ $$
 We can now write out the ISTA iterates as follows
 
 $$
-x^{k+1} = \mathcal{S}_{\lambda/L}\left(x^k - \frac{1}{L}A^\top(Ax^k-b)\right)
+x_{k+1} = \mathcal{S}_{\lambda/L}\left(x_k - \frac{1}{L}A^\top(Ax_k-b)\right)
 $$
 
-Where $L$ is the maximum eigenvalue of $A^\topA$. This can quickly be computed via [power iteration](https://en.wikipedia.org/wiki/Power_iteration).
+Where $L$ is the maximum eigenvalue of $A^TA$. This can quickly be computed via [power iteration](https://en.wikipedia.org/wiki/Power_iteration).
 
 It can be shown that this algorithm has a worst-case convergence rate of $\mathcal{O}(1 / t)$ meaning that if we double the number of iterations, we double the accuracy of the solution. This is already better than subgradient method, but is not the best we can do.
 
 ## FISTA
-ISTA was used for a while, but it can be painfully slow to converge. In 2009 Beck and Teboulle introduced FISTA (Fast Iterative Shrinking Threshold Algorithm) where they used momentum to accelerate ISTA and were able to achieve the optimal worst-case convergence rate of $\mathcal{O}(1 / t^2)$ <d-cite key="Beck2009Fast"></d-cite>.
+ISTA was used for a while, but many researchers noticed that it can be painfully slow to converge. In 2009, Beck and Teboulle introduced FISTA (Fast Iterative Shrinking Threshold Algorithm) where they used momentum to accelerate ISTA and were able to achieve the worst-case convergence rate of $\mathcal{O}(1 / t^2)$ , meaning that if we double the number of iterations, we quadruple the accuracy of the solution <d-cite key="Beck2009Fast"></d-cite>. FISTA can be thought of as applying ideas from [Nesterov's Accelerated Gradient](https://web.archive.org/web/20210302210908/https://blogs.princeton.edu/imabandit/2013/04/01/acceleratedgradientdescent/) to ISTA.
+
+This algorithm can be written as follows
+
+$$\begin{align}
+x_k &= \mathcal{S}_{\lambda/L}\left(y_k - \frac{1}{L}A^\top(Ay_k-b)\right) \\
+t_{k+1} &= \frac{1+\sqrt{1+4t_k^2}}{2} \\
+y_{k+1} &= x_k + \left(\frac{t_k-1}{t_{k+1}}\right)(x_k-x_{k-1})
+\end{align}
+$$
 
 ## ADMM
+The final algorithm we will consider for Lasso is the Alternating Direction Method of Multiplers (ADMM). This algorithm was introduced in the mid-1970s, but became popular again after Stephen Boyd *et al* published their paper in 2011 <d-cite key="Boyd2011-lv"></d-cite>. This algorithm attempts to solve problems of the following form
+
+$$
+\begin{split}
+    \underset{x,z}{\text{minimize}} 
+    \quad & f(x) + g(z) \\
+    \text{subject to} 
+    \quad & x = z, \\
+\end{split}
+$$
+
+The iterates of the algorithm are as follows:
+
+$$\begin{align}
+x_{k+1} &= \underset{x}{\text{argmin}} \; \mathcal{L}_\rho(x,z_k,y_k)  \\
+z_{k+1} &= \underset{z}{\text{argmin}} \;\mathcal{L}_\rho(x_{k+1},z,y_k)  \\
+y_{k+1} &= y_k + \rho(x_{k+1}-z_{k+1})
+\end{align}
+$$
+
+where 
+
+$$
+\mathcal{L}_\rho(x,z,y) = f(x) + g(z) + y^T(x-z) + \frac{\rho}{2}\|x-z\|_2^2
+$$
+
+For the case of Lasso, we have
+
+$$\begin{align}
+f(x) &= \frac{1}{2}\|Ax-b\|_2^2 \\
+g(z) &= \|z\|_1
+\end{align}
+$$
+
+and the ADMM iterates become
+
+$$\begin{align}
+x_{k+1} &= (A^TA+\rho I)^{-1}(A^Tb+\rho z_k -y_k)  \\
+z_{k+1} &= \mathcal{S}_{\lambda/\rho} (x_{k+1}+y_k/\rho)  \\
+y_{k+1} &= y_k + \rho(x_{k+1}-z_{k+1})
+\end{align}
+$$
+
+Here, $\rho$ is a stepsize and it is not clear how to choose it optimally.
 
 ## Results
-What we have 
+Now we will test the QP version of Lasso, ISTA, FISTA, and ADMM to see which is fastest. To generate the data, I generated a random $A \in \mathbb{R}^{m \times n}$ with $m < n$, then generated a random sparse vector $x_{\*}$, and calculated $b=Ax_*$.
+
+The stopping criteria for all solver was coming within $0.0001$ of the optimal objective function value.
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/Ista-Fista.png" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/ADMM.png" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    Convergence of ISTA, FISTA, and ADMM with varying stepsizes
+</div>
+
+| Algorithm      | Solve Time (sec) |
+|----------------|------------------|
+| ADMM (rho=50)  | 0.197            |
+| ADMM (rho=100) | 0.202            |
+| ADMM (rho=10)  | 1.097            |
+| FISTA          | 1.652            |
+| OSQP           | 2.271            |
+| ISTA           | 8.880            |
+
+It should be mentioned that the ISTA, FISTA, and ADMM implementations are quite naive and unoptimized, but the OSQP solver is written is pure C.
+The slowest algorithm by far is ISTA followed by reformulating Lasso as a QP and using OSQP, followed by FISTA, and the fastest algorithm was ADMM. 
 
 ***

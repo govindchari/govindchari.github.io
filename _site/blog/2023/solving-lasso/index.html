@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Solving Lasso Regression | Govind M Chari</title>
+    <title>Solving the Lasso Problem | Govind M Chari</title>
     <meta name="author" content="Govind M Chari">
     <meta name="description" content="Comparing optimization algorithms for Lasso">
     <meta name="keywords" content="gnc, optimization, phd">
@@ -66,7 +66,7 @@
   <body>
 <d-front-matter>
     <script async type="text/json">{
-      "title": "Solving Lasso Regression",
+      "title": "Solving the Lasso Problem",
       "description": "Comparing optimization algorithms for Lasso",
       "published": "September 19, 2023",
       "authors": [
@@ -162,7 +162,7 @@
     <div class="post distill">
 
       <d-title>
-        <h1>Solving Lasso Regression</h1>
+        <h1>Solving the Lasso Problem</h1>
         <p>Comparing optimization algorithms for Lasso</p>
       </d-title>
 
@@ -197,7 +197,7 @@
 <p>where $A \in \mathbb{R}^{m \times n}$</p>
 
 <p>A first thought to solve this problem might be gradient descent, however the objective function is non-smooth (due to the l1 penalty), so we cannot use gradient descent.
-A second thought is to use subgradient descent, which is a generalization of gradient descent to non-smooth functions. This would work, but subgradient descent has an extremely slow convergence rate of $\mathcal{O}(1 / \sqrt{t})$ (meaning you need four times the iterations to double the accuracy) so we will look at better algorithms.</p>
+A second thought is to use subgradient descent, which is a generalization of gradient descent to non-smooth functions. This would work, but subgradient descent has an extremely slow worst-case convergence rate of $\mathcal{O}(1 / \sqrt{t})$ (meaning you need four times the iterations to double the accuracy) so we will look at better algorithms.</p>
 
 <h2 id="reformulating-as-quadratic-program">Reformulating as Quadratic Program</h2>
 <p>One of the easiest things to do would be reformulating this problem as a Quadratic Program (QP) as follows:</p>
@@ -209,7 +209,9 @@ A second thought is to use subgradient descent, which is a generalization of gra
     \quad &amp; -t_i \leq x_i \leq t_i \quad \forall i \in [1,n]
 \end{split}\]
 
-<p>We can then feed this into a QP solver such as OSQP and then get an answer. This would would but it feel wasteful to turn an unconstrained problem into a constrained one and then using a generic QP solver. There should be a better way.</p>
+<p>To see how this was done reference the <a href="https://docs.mosek.com/modeling-cookbook/linear.html#the-ell-1-norm" rel="external nofollow noopener" target="_blank">Mosek Modeling Cookbook</a></p>
+
+<p>We can then feed this into a QP solver such as OSQP and then get an answer. This works, but it feels wasteful to turn an unconstrained problem into a constrained one and then use a generic QP solver. There should be better algorithms that exploit the structure of our problem where we have a smooth plus a non-smooth term.</p>
 
 <h2 id="ista">ISTA</h2>
 <p>ISTA or iterative shrinking threshold algorithm is an application of the proximal gradient method to the Lasso problem.</p>
@@ -223,7 +225,7 @@ A second thought is to use subgradient descent, which is a generalization of gra
 
 <p>The algorithm looks as follows:</p>
 
-\[x^{k+1} = \boldsymbol{\text{prox}}_{\eta g}(x^k - \eta \nabla f(x^k))\]
+\[x_{k+1} = \boldsymbol{\text{prox}}_{\eta g}(x_k - \eta \nabla f(x_k))\]
 
 <p>where $\eta$ is the gradient descent stepsize for $f$ which will be the inverse of the Lipschitz constant of $f$.</p>
 
@@ -250,17 +252,146 @@ A second thought is to use subgradient descent, which is a generalization of gra
 
 <p>We can now write out the ISTA iterates as follows</p>
 
-\[x^{k+1} = \mathcal{S}_{\lambda/L}\left(x^k - \frac{1}{L}A^\top(Ax^k-b)\right)\]
+\[x_{k+1} = \mathcal{S}_{\lambda/L}\left(x_k - \frac{1}{L}A^\top(Ax_k-b)\right)\]
 
-<p>It can be shown that this algorithm has a convergence rate of $\mathcal{O}(1 / t)$ meaning that if we double the number of iterations, we double the accuracy of the solution. This is already better than subgradient method, but is not the best we can do.</p>
+<p>Where $L$ is the maximum eigenvalue of $A^TA$. This can quickly be computed via <a href="https://en.wikipedia.org/wiki/Power_iteration" rel="external nofollow noopener" target="_blank">power iteration</a>.</p>
+
+<p>It can be shown that this algorithm has a worst-case convergence rate of $\mathcal{O}(1 / t)$ meaning that if we double the number of iterations, we double the accuracy of the solution. This is already better than subgradient method, but is not the best we can do.</p>
 
 <h2 id="fista">FISTA</h2>
-<p>ISTA was used for a while, but it can be painfully slow to converge. In 2009 Beck and Teboulle introduced FISTA (Fast Iterative Shrinking Threshold Algorithm) where they used momentum to accelerate ISTA and were able to achieve the optimal convergence rate of $\mathcal{O}(1 / t^2)$ <d-cite key="Beck2009Fast"></d-cite>.</p>
+<p>ISTA was used for a while, but many researchers noticed that it can be painfully slow to converge. In 2009, Beck and Teboulle introduced FISTA (Fast Iterative Shrinking Threshold Algorithm) where they used momentum to accelerate ISTA and were able to achieve the worst-case convergence rate of $\mathcal{O}(1 / t^2)$ , meaning that if we double the number of iterations, we quadruple the accuracy of the solution <d-cite key="Beck2009Fast"></d-cite>. FISTA can be thought of as applying ideas from <a href="https://web.archive.org/web/20210302210908/https://blogs.princeton.edu/imabandit/2013/04/01/acceleratedgradientdescent/" rel="external nofollow noopener" target="_blank">Nesterov’s Accelerated Gradient</a> to ISTA.</p>
+
+<p>This algorithm can be written as follows</p>
+
+\[\begin{align}
+x_k &amp;= \mathcal{S}_{\lambda/L}\left(y_k - \frac{1}{L}A^\top(Ay_k-b)\right) \\
+t_{k+1} &amp;= \frac{1+\sqrt{1+4t_k^2}}{2} \\
+y_{k+1} &amp;= x_k + \left(\frac{t_k-1}{t_{k+1}}\right)(x_k-x_{k-1})
+\end{align}\]
 
 <h2 id="admm">ADMM</h2>
+<p>The final algorithm we will consider for Lasso is the Alternating Direction Method of Multiplers (ADMM). This algorithm was introduced in the mid-1970s, but became popular again after Stephen Boyd <em>et al</em> published their paper in 2011 <d-cite key="Boyd2011-lv"></d-cite>. This algorithm attempts to solve problems of the following form</p>
+
+\[\begin{split}
+    \underset{x,z}{\text{minimize}} 
+    \quad &amp; f(x) + g(z) \\
+    \text{subject to} 
+    \quad &amp; x = z, \\
+\end{split}\]
+
+<p>The iterates of the algorithm are as follows:</p>
+
+\[\begin{align}
+x_{k+1} &amp;= \underset{x}{\text{argmin}} \; \mathcal{L}_\rho(x,z_k,y_k)  \\
+z_{k+1} &amp;= \underset{z}{\text{argmin}} \;\mathcal{L}_\rho(x_{k+1},z,y_k)  \\
+y_{k+1} &amp;= y_k + \rho(x_{k+1}-z_{k+1})
+\end{align}\]
+
+<p>where</p>
+
+\[\mathcal{L}_\rho(x,z,y) = f(x) + g(z) + y^T(x-z) + \frac{\rho}{2}\|x-z\|_2^2\]
+
+<p>For the case of Lasso, we have</p>
+
+\[\begin{align}
+f(x) &amp;= \frac{1}{2}\|Ax-b\|_2^2 \\
+g(z) &amp;= \|z\|_1
+\end{align}\]
+
+<p>and the ADMM iterates become</p>
+
+\[\begin{align}
+x_{k+1} &amp;= (A^TA+\rho I)^{-1}(A^Tb+\rho z_k -y_k)  \\
+z_{k+1} &amp;= \mathcal{S}_{\lambda/\rho} (x_{k+1}+y_k/\rho)  \\
+y_{k+1} &amp;= y_k + \rho(x_{k+1}-z_{k+1})
+\end{align}\]
+
+<p>Here, $\rho$ is a stepsize and it is not clear how to choose it optimally.</p>
 
 <h2 id="results">Results</h2>
-<p>What we have</p>
+<p>Now we will test the QP version of Lasso, ISTA, FISTA, and ADMM to see which is fastest. To generate the data, I generated a random $A \in \mathbb{R}^{m \times n}$ with $m &lt; n$, then generated a random sparse vector $x_{*}$, and calculated $b=Ax_*$.</p>
+
+<p>The stopping criteria for all solver was coming within $0.0001$ of the optimal objective function value.</p>
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/Ista-Fista-480.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/Ista-Fista-800.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/Ista-Fista-1400.webp"></source>
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/Ista-Fista.png" class="img-fluid rounded z-depth-1" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+
+  </picture>
+
+</figure>
+
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/ADMM-480.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/ADMM-800.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/ADMM-1400.webp"></source>
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/ADMM.png" class="img-fluid rounded z-depth-1" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+<div class="caption">
+    Convergence of ISTA, FISTA, and ADMM with varying stepsizes
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Algorithm</th>
+      <th>Solve Time (sec)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ADMM (rho=50)</td>
+      <td>0.197</td>
+    </tr>
+    <tr>
+      <td>ADMM (rho=100)</td>
+      <td>0.202</td>
+    </tr>
+    <tr>
+      <td>ADMM (rho=10)</td>
+      <td>1.097</td>
+    </tr>
+    <tr>
+      <td>FISTA</td>
+      <td>1.652</td>
+    </tr>
+    <tr>
+      <td>OSQP</td>
+      <td>2.271</td>
+    </tr>
+    <tr>
+      <td>ISTA</td>
+      <td>8.880</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>It should be mentioned that the ISTA, FISTA, and ADMM implementations are quite naive and unoptimized, but the OSQP solver is written is pure C.
+The slowest algorithm by far is ISTA followed by reformulating Lasso as a QP and using OSQP, followed by FISTA, and the fastest algorithm was ADMM.</p>
 
 <hr>
 

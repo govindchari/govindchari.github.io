@@ -17,3 +17,5 @@ I am a PhD student in the [Autonomous Controls Lab](https://depts.washington.edu
 
 I graduated *summa cum laude* from Cornell University in three years with a BS in Mechanical Engineering. I received the Sibley Prize, which is awarded to the graduating mechanical engineering student with the highest cumulative GPA.
 I have completed three internships at SpaceX: Network Topology for [Starlink](https://www.starlink.com/), Guidance, Navigation, and Controls for [Dragon](https://www.spacex.com/vehicles/dragon/), and Propulsion Analysis for [Raptor](https://www.youtube.com/watch?v=k0t6_l3x-f8).
+
+I will be interning on the Guidance, Navigation, and Control team at [Anduril](https://www.anduril.com/) during the summer of 2024 and will be interning with [Dr. Arvind Raghunathan](https://www.merl.com/people/raghunathan) at [Mitsubishi Electric Research Labs](https://www.merl.com/) working on optimization algorithms during the fall of 2024.

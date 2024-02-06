@@ -248,8 +248,8 @@ display_tags: ['statistics','optimization','computing'] # this tags will be disp
 
 scholar:
 
-  last_name: [Einstein]
-  first_name: [Albert, A.]
+  last_name: [Chari]
+  first_name: [Govind, M.]
 
   style: apa
   locale: en

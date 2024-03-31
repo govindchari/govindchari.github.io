@@ -162,11 +162,11 @@ The number of floating point operations for matrix factorization scales with $\m
 
 First Order methods on the other hand only use first-order information, which is information about the slope of a function which is given by its first derivative, or gradient in the multivariable case. First-order methods do not require matrix factorizations at each iteration and only require Matrix-vector multiplications. The number of floating point operations for matrix-vector multiplication scales with $\mathcal{O}(n^2)$, thus each iteration of a first-order method can be done quicker than an iteration of a second order method, but first order methods require more iterations to converge, since each iteration uses less information.
 
-First order methods are more or less gradient descent algorithms with some modifications to handle constraints such as projections. For extremely large scale problems first order methods are preferable due to the high cost of factorizing and storing large matrices. However, even for medium sized problems we can gain a lot of performance from first-order methods by customizing the algorithm to the specific problem structure. For a detailed description of customization refer to <d-cite key="Kamath2023Customized"></d-cite>.
+First order methods are more or less gradient descent algorithms with some modifications to handle constraints such as projections. For extremely large scale problems first order methods are preferable due to the high cost of factorizing and storing large matrices.
 
-All of this performance of first order methods does have some drawbacks. First order methods are extremely sensitive to ill conditioned objectives and badly scaled problem data. Thus an extrememly fast and robust implementation of a first-order method must scale the problem data, precondition the problem, and be customized to the problem structure. Without customization the algorithm will still be very fast (around the same speed as IPMs), but customization allows the full speed of the algorithm to be unlocked. To see some speed results of a particular first order algorithm called PIPG, refer to <d-cite key="Kamath2023Customized"></d-cite>, <d-cite key="Yu2022Extrapolated"></d-cite>. These papers have results that show that PIPG is faster than ECOS, SCS, MOSEK, Gurobi, and OSQP once customized and preconditioned.
+All of this performance of first order methods does have some drawbacks. First order methods are extremely sensitive to ill conditioned objectives and badly scaled problem data. Thus an extrememly fast and robust implementation of a first-order method must scale and precondition the problem data.
 
-Some examples of first order solvers are [OSQP](https://osqp.org/), [SCS](https://github.com/cvxgrp/scs), and PIPG.
+Some examples of first order solvers are [OSQP](https://osqp.org/) and [SCS](https://github.com/cvxgrp/scs).
 
 ## Summary
 

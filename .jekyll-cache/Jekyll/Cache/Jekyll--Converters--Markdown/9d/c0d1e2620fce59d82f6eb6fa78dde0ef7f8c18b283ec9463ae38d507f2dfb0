@@ -1,3 +1,0 @@
-I"ä<h2 id="introduction">Introduction</h2>
-<p>Lasso regression is and important regularization technique for linear regression that can also perform variable selection. What this means is that solutions to the lasso problem tend to be sparse (contain zeros) which allows us to rule out certain independent variables in our model. A great resource to familiarize yourself with lasso is <a href="https://www.youtube.com/watch?v=GaXfqoLR_yI&amp;ab_channel=SteveBrunton">this video</a>.</p>
-:ET

@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2024-04-29T18:45:19-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2024-07-24T18:42:12-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
 </subtitle><entry><title type="html">Solving the Lasso Problem</title><link href="http://localhost:4000/blog/2023/solving-lasso/" rel="alternate" type="text/html" title="Solving the Lasso Problem" /><published>2023-10-25T00:00:00-07:00</published><updated>2023-10-25T00:00:00-07:00</updated><id>http://localhost:4000/blog/2023/solving-lasso</id><content type="html" xml:base="http://localhost:4000/blog/2023/solving-lasso/"><![CDATA[<h2 id="introduction">Introduction</h2>
+
 <p>Lasso regression is and important regularization technique for linear regression that can also perform variable selection. What this means is that solutions to the lasso problem tend to be sparse (contain zeros) which allows us to rule out certain independent variables in our model. A great resource to familiarize yourself with lasso is <a href="https://www.youtube.com/watch?v=GaXfqoLR_yI&amp;ab_channel=SteveBrunton">this video</a>.</p>
 
 <p>Lasso is of incredible importance in statistics, signal processing, compressed sensing, and image processing. In this post we will look at a variety of optimization technique for solving the lasso problem.</p>
@@ -7,7 +8,7 @@
 <p>The lasso optimization problem is an unconstrained optimization problem which can be written as follows:</p>
 
 \[\begin{split}
-    \underset{x}{\text{minimize}} 
+    \underset{x}{\text{minimize}}
     \quad &amp; \frac{1}{2}\|Ax-b\|_2^2 + \lambda \|x\|_1 \\
 \end{split}\]
 
@@ -17,12 +18,13 @@
 A second thought is to use subgradient descent, which is a generalization of gradient descent to non-smooth functions. This would work, but subgradient descent has an extremely slow worst-case convergence rate of $\mathcal{O}(1 / \sqrt{t})$ (meaning you need four times the iterations to double the accuracy) so we will look at better algorithms.</p>
 
 <h2 id="reformulating-as-quadratic-program">Reformulating as Quadratic Program</h2>
+
 <p>One of the easiest things to do would be reformulating this problem as a Quadratic Program (QP) as follows:</p>
 
 \[\begin{split}
-    \underset{x}{\text{minimize}} 
+    \underset{x}{\text{minimize}}
     \quad &amp; \frac{1}{2}\|Ax-b\|_2^2 + \lambda \sum_{i=1}^n t_i \\
-    \text{subject to} 
+    \text{subject to}
     \quad &amp; -t_i \leq x_i \leq t_i \quad \forall i \in [1,n]
 \end{split}\]
 
@@ -31,12 +33,13 @@ A second thought is to use subgradient descent, which is a generalization of gra
 <p>We can then feed this into a QP solver such as OSQP and then get an answer. This works, but it feels wasteful to turn an unconstrained problem into a constrained one and then use a generic QP solver. There should be better algorithms that exploit the structure of our problem where we have a smooth plus a non-smooth term.</p>
 
 <h2 id="ista">ISTA</h2>
+
 <p>ISTA or iterative shrinking threshold algorithm is an application of the proximal gradient method to the Lasso problem.</p>
 
 <p>The proximal gradient method solves problems of the following form, where $f$ is differentiable</p>
 
 \[\begin{split}
-    \underset{x}{\text{minimize}} 
+    \underset{x}{\text{minimize}}
     \quad &amp; f(x) + g(x) \\
 \end{split}\]
 
@@ -76,6 +79,7 @@ A second thought is to use subgradient descent, which is a generalization of gra
 <p>It can be shown that this algorithm has a worst-case convergence rate of $\mathcal{O}(1 / t)$ meaning that if we double the number of iterations, we double the accuracy of the solution. This is already better than subgradient method, but is not the best we can do.</p>
 
 <h2 id="fista">FISTA</h2>
+
 <p>ISTA was used for a while, but many researchers noticed that it can be painfully slow to converge. In 2009, Beck and Teboulle introduced FISTA (Fast Iterative Shrinking Threshold Algorithm) where they used momentum to accelerate ISTA and were able to achieve the worst-case convergence rate of $\mathcal{O}(1 / t^2)$ , meaning that if we double the number of iterations, we quadruple the accuracy of the solution <d-cite key="Beck2009Fast"></d-cite>. FISTA can be thought of as applying ideas from <a href="https://web.archive.org/web/20210302210908/https://blogs.princeton.edu/imabandit/2013/04/01/acceleratedgradientdescent/">Nesterov’s Accelerated Gradient</a> to ISTA.</p>
 
 <p>This algorithm can be written as follows</p>
@@ -87,12 +91,13 @@ y_{k+1} &amp;= x_k + \left(\frac{t_k-1}{t_{k+1}}\right)(x_k-x_{k-1})
 \end{align}\]
 
 <h2 id="admm">ADMM</h2>
+
 <p>The final algorithm we will consider for Lasso is the Alternating Direction Method of Multiplers (ADMM). This algorithm was introduced in the mid-1970s, but became popular again after Stephen Boyd <em>et al</em> published their paper in 2011 <d-cite key="Boyd2011-lv"></d-cite>. This algorithm attempts to solve problems of the following form</p>
 
 \[\begin{split}
-    \underset{x,z}{\text{minimize}} 
+    \underset{x,z}{\text{minimize}}
     \quad &amp; f(x) + g(z) \\
-    \text{subject to} 
+    \text{subject to}
     \quad &amp; x = z, \\
 \end{split}\]
 
@@ -123,9 +128,10 @@ z_{k+1} &amp;= \mathcal{S}_{\lambda/\rho} (x_{k+1}+y_k/\rho)  \\
 y_{k+1} &amp;= y_k + \rho(x_{k+1}-z_{k+1})
 \end{align}\]
 
-<p>Here, $\rho$ is a stepsize and it is not clear how to choose it optimally.</p>
+<p>Here, $\rho &gt; 0$ is a stepsize.</p>
 
 <h2 id="results">Results</h2>
+
 <p>Now we will test the QP version of Lasso, ISTA, FISTA, and ADMM to see which is fastest. To generate the data, I generated a random $A \in \mathbb{R}^{m \times n}$ with $m &lt; n$, then generated a random sparse vector $x_{*}$, and calculated $b=Ax_*$.</p>
 
 <p>The stopping criteria for all solver was coming within $0.0001$ of the optimal objective function value.</p>

@@ -11,9 +11,9 @@ For my final project for MAE 4780: Feedback Controls, I created a 3DOF Simulink 
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/3DOF Model Rocket.png" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/img/3DOF Model Rocket.png" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/EKF.png" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/img/EKF.png" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>

@@ -12,10 +12,10 @@ A 6DOF simulation in Simulink for a Thrust Vectoring Model Rocket. This simulati
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/Model Rocket Monte Carlo.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/img/Model Rocket Monte Carlo.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/Block Diagram.png" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/img/Block Diagram.png" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
 
 </div>

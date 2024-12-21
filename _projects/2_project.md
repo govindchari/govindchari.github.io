@@ -11,10 +11,10 @@ For my final project in ECE 5555: Stochastic Control and Estimation, I recreated
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/GFOLD.jpeg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/img/GFOLD.jpeg" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/Monte Carlo.png" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/img/Monte Carlo.png" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 

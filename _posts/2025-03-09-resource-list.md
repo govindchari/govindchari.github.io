@@ -23,6 +23,7 @@ bibliography: mybib.bib
 toc:
   - name: Introduction
   - name: Optimization
+  - name: Computing
 ---
 
 This post is a collection of good resources I have used during my studies to learn topics in convex optimization and computer systems and my review of each resource. This is intended to be a living document, and I will update this list every once in a while.
@@ -54,5 +55,29 @@ My only complaints about this book is that primal-dual interior point methods ar
 This textbook can be freely found [here](https://large-scale-book.mathopt.com/LSCOMO.pdf) with accompanying videos [here](https://www.youtube.com/@large-scaleconvexoptimizat2973/videos).
 
 This is my favorite textbook of all time by a long shot, and is the best resource I have found to understand operator-splitting methods. I have always heard about projected gradient descent, the proximal point method, ISTA, augmented Lagrangian methods, Douglas-Rachford Splitting, ADMM, PDHG etc, and always viewed them as separate concepts in my mind. However, this textbook unifies all of these algorithms as fixed-point iterations with some averaged operator. Even reading the first three chapters will be an extremely eye-opening experience to those interested in operator-splitting methods.
+
+### Convex Analysis and Nonsmooth Optimization by Drusvyatskiy
+[This set of course notes](https://sites.math.washington.edu/~ddrusv/crs/Math_516_2020/bookwithindex.pdf) discusses the fundemental concepts in convex analysis in a rigorous way. I used these notes in my Convex Analysis class and enjoyed them.
+
+### Convex Analysis and Monotone Operator Theory by Baushke and Combettes
+Disclaimer: I have not read this textbook, but it has been highly praised for rigorously discussed Monotone operator theory which is fundemental for rigorously analyzing operator splitting methods. 
+
+## Computing
+
+### The Cherno
+The YouTube playlist is [here](https://www.youtube.com/playlist?list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb). This is the best video series to learn C++. I love that he discusses not only C++ syntax, but what is happening under the hood in terms how data and the program is stored in memory.
+
+### Building an 8-bit computer
+[This video series](https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU) by Ben Eater is a fantastic introduction to computer architecture. He starts from simple and/or/not gates and builds an 8-bit computer on a breadboard while explaining everything you need to know along the way.
+
+Although this series does not discuss important topics for performance such as cache and branch prediction, this is a fantastic video series for a beginner who wants to understand how a CPU works.
+
+### Computer Systems Programming
+This [video series](https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22) is from the 15-213: Introduction to Computer Systems course at Carnegie Mellon University and follows [this textbook](https://www.cs.cmu.edu/~213/textbook.html).
+
+This is my favorite resource to learn about lower level concepts in computing such as assembly, memory cache, and writing more performant code.
+
+### Performance Aware Programming 
+[This course](https://www.computerenhance.com/p/table-of-contents) by Casey Muratori is fantastic for understanding how to write code in a performance oriented way. I am currently working through it.
 
 ---

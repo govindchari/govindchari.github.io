@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-03-09T21:49:44-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-03-09T22:33:14-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
 </subtitle><entry><title type="html">Resource list</title><link href="http://localhost:4000/blog/2025/resource-list/" rel="alternate" type="text/html" title="Resource list" /><published>2025-03-09T00:00:00-08:00</published><updated>2025-03-09T00:00:00-08:00</updated><id>http://localhost:4000/blog/2025/resource-list</id><content type="html" xml:base="http://localhost:4000/blog/2025/resource-list/"><![CDATA[<p>This post is a collection of good resources I have used during my studies to learn topics in convex optimization and computer systems and my review of each resource. This is intended to be a living document, and I will update this list every once in a while.</p>
 
 <p>Disclaimer: I am not an expert in optimization or computing, but I am writing this post because I feel like I have spent enough time learning both to be able to recommend good resources.</p>
@@ -28,6 +28,30 @@
 <p>This textbook can be freely found <a href="https://large-scale-book.mathopt.com/LSCOMO.pdf">here</a> with accompanying videos <a href="https://www.youtube.com/@large-scaleconvexoptimizat2973/videos">here</a>.</p>
 
 <p>This is my favorite textbook of all time by a long shot, and is the best resource I have found to understand operator-splitting methods. I have always heard about projected gradient descent, the proximal point method, ISTA, augmented Lagrangian methods, Douglas-Rachford Splitting, ADMM, PDHG etc, and always viewed them as separate concepts in my mind. However, this textbook unifies all of these algorithms as fixed-point iterations with some averaged operator. Even reading the first three chapters will be an extremely eye-opening experience to those interested in operator-splitting methods.</p>
+
+<h3 id="convex-analysis-and-nonsmooth-optimization-by-drusvyatskiy">Convex Analysis and Nonsmooth Optimization by Drusvyatskiy</h3>
+<p><a href="https://sites.math.washington.edu/~ddrusv/crs/Math_516_2020/bookwithindex.pdf">This set of course notes</a> discusses the fundemental concepts in convex analysis in a rigorous way. I used these notes in my Convex Analysis class and enjoyed them.</p>
+
+<h3 id="convex-analysis-and-monotone-operator-theory-by-baushke-and-combettes">Convex Analysis and Monotone Operator Theory by Baushke and Combettes</h3>
+<p>Disclaimer: I have not read this textbook, but it has been highly praised for rigorously discussed Monotone operator theory which is fundemental for rigorously analyzing operator splitting methods.</p>
+
+<h2 id="computing">Computing</h2>
+
+<h3 id="the-cherno">The Cherno</h3>
+<p>The YouTube playlist is <a href="https://www.youtube.com/playlist?list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb">here</a>. This is the best video series to learn C++. I love that he discusses not only C++ syntax, but what is happening under the hood in terms how data and the program is stored in memory.</p>
+
+<h3 id="building-an-8-bit-computer">Building an 8-bit computer</h3>
+<p><a href="https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU">This video series</a> by Ben Eater is a fantastic introduction to computer architecture. He starts from simple and/or/not gates and builds an 8-bit computer on a breadboard while explaining everything you need to know along the way.</p>
+
+<p>Although this series does not discuss important topics for performance such as cache and branch prediction, this is a fantastic video series for a beginner who wants to understand how a CPU works.</p>
+
+<h3 id="computer-systems-programming">Computer Systems Programming</h3>
+<p>This <a href="https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22">video series</a> is from the 15-213: Introduction to Computer Systems course at Carnegie Mellon University and follows <a href="https://www.cs.cmu.edu/~213/textbook.html">this textbook</a>.</p>
+
+<p>This is my favorite resource to learn about lower level concepts in computing such as assembly, memory cache, and writing more performant code.</p>
+
+<h3 id="performance-aware-programming">Performance Aware Programming</h3>
+<p><a href="https://www.computerenhance.com/p/table-of-contents">This course</a> by Casey Muratori is fantastic for understanding how to write code in a performance oriented way. I am currently working through it.</p>
 
 <hr />]]></content><author><name>Govind Chari</name></author><category term="optimization" /><summary type="html"><![CDATA[Various useful resources for learning optimziation and computing]]></summary></entry><entry><title type="html">Solving the Lasso Problem</title><link href="http://localhost:4000/blog/2023/solving-lasso/" rel="alternate" type="text/html" title="Solving the Lasso Problem" /><published>2023-10-25T00:00:00-07:00</published><updated>2023-10-25T00:00:00-07:00</updated><id>http://localhost:4000/blog/2023/solving-lasso</id><content type="html" xml:base="http://localhost:4000/blog/2023/solving-lasso/"><![CDATA[<h2 id="introduction">Introduction</h2>
 

@@ -10,9 +10,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Qualifying Exam | Govind M Chari</title>
+    <title>software | Govind M Chari</title>
     <meta name="author" content="Govind M Chari">
-    <meta name="description" content="Documents from my PhD qualifying exam.">
+    <meta name="description" content="Software I have worked on.">
     <meta name="keywords" content="gnc, optimization, phd">
 
 
@@ -33,7 +33,7 @@
     <link rel="shortcut icon" href="/assets/img/favicon.png">
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="http://localhost:4000/projects/12_project/">
+    <link rel="canonical" href="http://localhost:4000/software/">
     
     <!-- Dark Mode -->
     
@@ -80,8 +80,8 @@
               <li class="nav-item ">
                 <a class="nav-link" href="/publications/">publications</a>
               </li>
-              <li class="nav-item ">
-                <a class="nav-link" href="/software/">software</a>
+              <li class="nav-item active">
+                <a class="nav-link" href="/software/">software<span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item ">
                 <a class="nav-link" href="/projects/">projects</a>
@@ -114,54 +114,32 @@
         <div class="post">
 
           <header class="post-header">
-            <h1 class="post-title">Qualifying Exam</h1>
-            <p class="post-description">Documents from my PhD qualifying exam.</p>
+            <h1 class="post-title">software</h1>
+            <p class="post-description">Software I have worked on.</p>
           </header>
 
           <article>
-            <p>In the Aeronautics and Astronautics Department at the Univerisity of Washington, the PhD qualifying exam has two parts: a written exam and an oral exam. In the written exam you are given a journal paper and asked to respond and critique it while providing a sufficient literature review of the field. Then you must make and present a slidedeck to your committee. In the oral part, your committee takes turns asking questions from various courses. For my quals, I got asked questions from convex optimization, structural optimization, nonlinear system theory, and feedback control.</p>
+            <h3 id="main-developer">Main Developer</h3>
+<ul>
+  <li>
+    <p><a href="https://qoco-org.github.io/qoco/index.html" rel="external nofollow noopener" target="_blank">QOCO</a>: QOCO is an open-source solver for quadratic objective SOCPs written in C. It can be called from CVXPY.</p>
+  </li>
+  <li>
+    <p><a href="https://qoco-org.github.io/qoco/codegen/index.html" rel="external nofollow noopener" target="_blank">QOCOGEN</a>: QOCOGEN is an open-source custom solver generator for quadratic objective SOCPs written in C. It generates a custom solver written in C (called QOCO Custom) which exploits the sparsity structure of the problem to achieve even faster solvetimes. QOCOGEN can be called from CVXPYgen.</p>
+  </li>
+</ul>
 
-<p>For my qualifying report, I was given a paper on synthesis of convex optimization algorithms. The paper can be found <a href="/assets/pdf/schrer-gdLyap.pdf">here</a>, my report can be found <a href="/assets/pdf/Govind_Chari_Written_Quals.pdf">here</a>, and my slides can be found <a href="/assets/pdf/quals_oral_slides.pdf">here</a>.</p>
+<h3 id="contributor">Contributor</h3>
+<p>I have also made open-source contributions to the following software:</p>
 
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        <figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/synthesized-rho-480.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/synthesized-rho-800.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/synthesized-rho-1400.webp"></source>
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/synthesized-rho.png" class="img-fluid rounded z-depth-1" width="auto" height="auto" title="example image" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
-
-  </picture>
-
-</figure>
-
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        <figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/synthesized-480.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/synthesized-800.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/synthesized-1400.webp"></source>
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/synthesized.png" class="img-fluid rounded z-depth-1" width="auto" height="auto" title="example image" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
-
-  </picture>
-
-</figure>
-
-    </div>
-</div>
-
+<ul>
+  <li>
+    <p><a href="https://www.cvxpy.org/" rel="external nofollow noopener" target="_blank">CVXPY</a>: A domain specific language for optimization problems in Python that allows users to specify optimization problems in a way that is nearly identical to the math.</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/cvxgrp/cvxpygen" rel="external nofollow noopener" target="_blank">CVXPYgen</a>: A code generation tool that sits on top of CVXPY and generates an embeddable solver for a users specified problem class.</p>
+  </li>
+</ul>
 
           </article>
 

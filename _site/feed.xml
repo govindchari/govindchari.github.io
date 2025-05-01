@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-04-26T16:05:44-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-04-30T21:27:37-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
 </subtitle><entry><title type="html">Resource list</title><link href="http://localhost:4000/blog/2025/resource-list/" rel="alternate" type="text/html" title="Resource list" /><published>2025-03-09T00:00:00-08:00</published><updated>2025-03-09T00:00:00-08:00</updated><id>http://localhost:4000/blog/2025/resource-list</id><content type="html" xml:base="http://localhost:4000/blog/2025/resource-list/"><![CDATA[<p>This post is a collection of good resources I have used during my studies to learn topics in convex optimization and computer systems and my review of each resource. This is intended to be a living document, and I will update this list every once in a while.</p>
 
 <p>Disclaimer: I am not an expert in optimization or computing, but I am writing this post because I feel like I have spent enough time learning both to be able to recommend good resources.</p>
@@ -33,7 +33,7 @@
 <p><a href="https://sites.math.washington.edu/~ddrusv/crs/Math_516_2020/bookwithindex.pdf">This set of course notes</a> discusses the fundemental concepts in convex analysis in a rigorous way. I used these notes in my Convex Analysis class and enjoyed them.</p>
 
 <h3 id="convex-analysis-and-monotone-operator-theory-by-baushke-and-combettes">Convex Analysis and Monotone Operator Theory by Baushke and Combettes</h3>
-<p>Disclaimer: I have not read this textbook, but it has been highly praised for rigorously discussed Monotone operator theory which is fundemental for rigorously analyzing operator splitting methods.</p>
+<p>Disclaimer: I have not read this textbook, but it has been highly praised for rigorously discussed Monotone operator theory which is fundamental for rigorously analyzing operator splitting methods.</p>
 
 <h2 id="computing">Computing</h2>
 
@@ -53,7 +53,14 @@
 <h3 id="performance-aware-programming">Performance Aware Programming</h3>
 <p><a href="https://www.computerenhance.com/p/table-of-contents">This course</a> by Casey Muratori is fantastic for understanding how to write code in a performance oriented way. I am currently working through it.</p>
 
-<hr />]]></content><author><name>Govind Chari</name></author><category term="optimization" /><summary type="html"><![CDATA[Various useful resources for learning optimziation and computing]]></summary></entry><entry><title type="html">Solving the Lasso Problem</title><link href="http://localhost:4000/blog/2023/solving-lasso/" rel="alternate" type="text/html" title="Solving the Lasso Problem" /><published>2023-10-25T00:00:00-07:00</published><updated>2023-10-25T00:00:00-07:00</updated><id>http://localhost:4000/blog/2023/solving-lasso</id><content type="html" xml:base="http://localhost:4000/blog/2023/solving-lasso/"><![CDATA[<h2 id="introduction">Introduction</h2>
+<h2 id="math">Math</h2>
+<h3 id="elementary-analysis-by-kenneth-ross">Elementary Analysis by Kenneth Ross</h3>
+<p>I learned basic analysis from this textbook. The book is well written, I like the examples and I like that the textbook is not overly rigorous like Rudin. I think it is a good intro to analysis.</p>
+
+<h3 id="introductory-functional-analysis-by-erwin-kreyszig">Introductory Functional Analysis by Erwin Kreyszig</h3>
+<p>I have skimmed the first few chapters. The author does a good job of motivating the need for the abstraction of metric and Banach spaces. Most of the material in the first two chapters was pretty easy to grasp with knowledge of proofs, linear algebra, and analysis. I started reading this textbook so I could understand Convex Analysis and Monotone Operator Theory by Baushke and Combettes, as they work in Hilbert spaces. I also think this material is pretty interesting in its own right.</p>
+
+<hr />]]></content><author><name>Govind Chari</name></author><category term="optimization" /><summary type="html"><![CDATA[Various useful resources for learning optimization and computing]]></summary></entry><entry><title type="html">Solving the Lasso Problem</title><link href="http://localhost:4000/blog/2023/solving-lasso/" rel="alternate" type="text/html" title="Solving the Lasso Problem" /><published>2023-10-25T00:00:00-07:00</published><updated>2023-10-25T00:00:00-07:00</updated><id>http://localhost:4000/blog/2023/solving-lasso</id><content type="html" xml:base="http://localhost:4000/blog/2023/solving-lasso/"><![CDATA[<h2 id="introduction">Introduction</h2>
 
 <p>Lasso regression is and important regularization technique for linear regression that can also perform variable selection. What this means is that solutions to the lasso problem tend to be sparse (contain zeros) which allows us to rule out certain independent variables in our model. A great resource to familiarize yourself with lasso is <a href="https://www.youtube.com/watch?v=GaXfqoLR_yI&amp;ab_channel=SteveBrunton">this video</a>.</p>
 

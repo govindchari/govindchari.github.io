@@ -1,7 +1,7 @@
 ---
 layout: distill
 title: Resource list
-description: Various useful resources for learning optimziation and computing
+description: Various useful resources for learning optimization and computing
 tags: optimization
 giscus_comments: false
 date: 2025-03-09
@@ -24,6 +24,7 @@ toc:
   - name: Introduction
   - name: Optimization
   - name: Computing
+  - name: Math
 ---
 
 This post is a collection of good resources I have used during my studies to learn topics in convex optimization and computer systems and my review of each resource. This is intended to be a living document, and I will update this list every once in a while.
@@ -60,7 +61,7 @@ This is my favorite textbook of all time by a long shot, and is the best resourc
 [This set of course notes](https://sites.math.washington.edu/~ddrusv/crs/Math_516_2020/bookwithindex.pdf) discusses the fundemental concepts in convex analysis in a rigorous way. I used these notes in my Convex Analysis class and enjoyed them.
 
 ### Convex Analysis and Monotone Operator Theory by Baushke and Combettes
-Disclaimer: I have not read this textbook, but it has been highly praised for rigorously discussed Monotone operator theory which is fundemental for rigorously analyzing operator splitting methods. 
+Disclaimer: I have not read this textbook, but it has been highly praised for rigorously discussed Monotone operator theory which is fundamental for rigorously analyzing operator splitting methods. 
 
 ## Computing
 
@@ -79,5 +80,12 @@ This is my favorite resource to learn about lower level concepts in computing su
 
 ### Performance Aware Programming 
 [This course](https://www.computerenhance.com/p/table-of-contents) by Casey Muratori is fantastic for understanding how to write code in a performance oriented way. I am currently working through it.
+
+## Math
+### Elementary Analysis by Kenneth Ross
+I learned basic analysis from this textbook. The book is well written, I like the examples and I like that the textbook is not overly rigorous like Rudin. I think it is a good intro to analysis.
+
+### Introductory Functional Analysis by Erwin Kreyszig
+I have skimmed the first few chapters. The author does a good job of motivating the need for the abstraction of metric and Banach spaces. Most of the material in the first two chapters was pretty easy to grasp with knowledge of proofs, linear algebra, and analysis. I started reading this textbook so I could understand Convex Analysis and Monotone Operator Theory by Baushke and Combettes, as they work in Hilbert spaces. I also think this material is pretty interesting in its own right.
 
 ---

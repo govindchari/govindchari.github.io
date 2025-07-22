@@ -23,6 +23,11 @@
 - title: Experience
   type: time_table
   contents:
+    - title: Applied Scientist Intern
+      institution: Amazon, Bellevue, WA
+      year: Summer 2025
+      description:
+        - Large-scale optimization for Amazon's supply chain.
     - title: Research Intern
       institution: Mitsubishi Electric Research Lab, Cambridge, MA
       year: Fall 2024

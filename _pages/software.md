@@ -7,9 +7,9 @@ nav: true
 nav_order: 2
 ---
 ### Main Developer
-- [QOCO](https://qoco-org.github.io/qoco/index.html): QOCO is an open-source solver for quadratic objective SOCPs written in C. It can be called from CVXPY.
+- [QOCO](https://github.com/qoco-org/qoco): QOCO is an open-source solver for quadratic objective SOCPs written in C. It can be called from CVXPY.
 
-- [QOCOGEN](https://qoco-org.github.io/qoco/codegen/index.html): QOCOGEN is an open-source custom solver generator for quadratic objective SOCPs written in C. It generates a custom solver written in C (called QOCO Custom) which exploits the sparsity structure of the problem to achieve even faster solvetimes. QOCOGEN can be called from CVXPYgen.
+- [QOCOGEN](https://github.com/qoco-org/qocogen): QOCOGEN is an open-source custom solver generator for quadratic objective SOCPs written in C. It generates a custom solver written in C (called QOCO Custom) which exploits the sparsity structure of the problem to achieve even faster solvetimes. QOCOGEN can be called from CVXPYgen.
 
 ### Contributor
 I have also made open-source contributions to the following software:

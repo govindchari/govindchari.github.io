@@ -7,4 +7,3 @@ redirect: https://govindchari1.wixsite.com/portfolio/vtol-rocket
 importance: 1
 category: Undergrad
 ---
-

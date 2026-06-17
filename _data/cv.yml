@@ -34,41 +34,51 @@ cv:
       - company: Amazon
         position: Applied Scientist Intern
         location: Bellevue, WA
-        start_date: Summer 2025
+        start_date: June 2025
+        end_date: Sept 2025
         highlights:
-          - Large-scale optimization for Amazon's supply chain.
+          - Large scale optimization in Supply Chain Optimization Technologies (SCOT).
+          - Developed a distributed optimization algorithm for shipment optimization.
 
       - company: Mitsubishi Electric Research Lab
         position: Research Intern
         location: Cambridge, MA
-        start_date: Fall 2024
+        start_date: Sept 2024
+        end_date: Dec 2024
         highlights:
-          - Optimization algorithms research hosted by Dr. Arvind Raghunathan.
+          - Developed a C++ based active set solver for quadratic programs based on a novel homogeneous formulation for infeasibility detection.
 
       - company: Anduril Industries
         position: Guidance, Navigation, and Control Intern
         location: Costa Mesa, CA
-        start_date: Summer 2024
+        start_date: June 2024
+        end_date: Sept 2024
         highlights:
-          - Trajectory optimization for Fury and Roadrunner.
+          - Trajectory optimization for a group 5 drone high agility maneuver and [Roadrunner](https://www.anduril.com/roadrunner/) landing guidance.
+          - Prepared and delivered a lecture on trajectory optimization for the flight engineering team (around 85 engineers).
 
       - company: SpaceX
         position: Software Engineering Intern
         location: Redmond, WA
-        start_date: Summer 2023
+        start_date: June 2023
+        end_date: Sept 2023
         highlights:
-          - Beam planning for Starlink.
+          - Developed numerical optimization based beam planning algorithm for [Starlink](https://www.starlink.com/).
+          - Implemented custom convex parser in C++.
 
       - company: SpaceX
         position: Guidance, Navigation, and Control Intern
         location: Hawthorne, CA
-        start_date: Summer 2022
+        start_date: June 2022
+        end_date: Aug 2022
         highlights:
-          - Entry guidance analysis for Dragon.
+          - Ran Monte-Carlo simulations and analysis to assess the impact of altering thruster configuration on [Dragon's](https://www.spacex.com/vehicles/dragon/) entry performance.
+          - Built verification tool to ensure positive propellant margin in all two fault propulsion cases.
 
       - company: SpaceX
         position: Propulsion Analysis Intern
         location: Hawthorne, CA
-        start_date: Summer 2021
+        start_date: June 2021
+        end_date: Aug 2021
         highlights:
-          - Structural and thermal analysis for Raptor.
+          - Performed nonlinear structural and thermal analysis of Raptor and Merlin engine components using ANSYS.

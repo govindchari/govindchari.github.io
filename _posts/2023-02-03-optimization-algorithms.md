@@ -31,12 +31,11 @@ toc:
   - name: First Order Methods
   - name: Summary
   - name: References
-
 ---
 
 ## Introduction
 
-Convex optimization is a class of optimization concerned with minimizing a convex function over a convex set. 
+Convex optimization is a class of optimization concerned with minimizing a convex function over a convex set.
 One important feature of convex optimization is that any local minimum for a convex problem is the global minimum,
 this means that the global minimum can be found very quickly. Mathamatically, a convex problem can be written as follows
 
@@ -53,16 +52,17 @@ constraints, and $g_{i}(x) \leq 0$ are convex inequality constraints.
 
 This post focuses on stressing the intuition of different classes of convex solver and provides references for further reading at the end of each section.
 
-***
+---
 
 ## Active Set Methods
-A constraint is said to be active at a point $x_0$ if $g_i(x_0) = 0$. We can define the optimal active set as the set of all constraints that are active at the optimal solution $x^*$. We can see that all the equality constraints will be in the optimal active set. 
+
+A constraint is said to be active at a point $x_0$ if $g_i(x_0) = 0$. We can define the optimal active set as the set of all constraints that are active at the optimal solution $x^*$. We can see that all the equality constraints will be in the optimal active set.
 
 Active set methods take advantage of the fact that equality constrainted problems are easier to solve than inequality constrainted problems. These methods start with a guess of the optimal active set and solve this equality constrained subproblem. Then it uses information from the solution of the subproblem, for example the sign of the dual variables, to add and remove constraints from the current guess of the active set.
 
 If a good guess of the optimal active set is known, these methods can be be very fast and only take a handful of iterations. As a result these methods warmstart well and would be advantageous in applications like model predictive control since it is is unlikely that the optimal active set drastically changes between two solves.
 
-The disadvantage of active set methods is that the theoretical worst-case runtime is exponential in the number of constraints since in the worst case, all combinations of constraints must be tested. 
+The disadvantage of active set methods is that the theoretical worst-case runtime is exponential in the number of constraints since in the worst case, all combinations of constraints must be tested.
 
 One famous example of an active set algorithm is Simplex, which was invented by George Dantzig for Linear Programs (LPs). In Simplex, all iterates are vertices of the feasible set (which is a polytope), however this is not the case for quadratic programs (QPs) or any more complex optimization problem. Another active set solver is [qpOASES](https://github.com/coin-or/qpOASES).
 
@@ -95,7 +95,7 @@ A & 0
 \begin{bmatrix}
 x \\
 \lambda
-\end{bmatrix} = 
+\end{bmatrix} =
 \begin{bmatrix}
 -q \\
 b
@@ -104,9 +104,9 @@ $$
 
 Thus we can see that solving the equality constrained quadratic program amounts to nothing more than solving a linear system.
 
-To learn more about the details of active set methods reference Chapter 16 Section 5 of *Numerical Optimization* by Nocedal and Wright.
+To learn more about the details of active set methods reference Chapter 16 Section 5 of _Numerical Optimization_ by Nocedal and Wright.
 
-***
+---
 
 ## Interior Point Methods (IPMs)
 
@@ -121,7 +121,7 @@ $$
 \end{align*}
 $$
 
-where $\mathcal{D}$ is some convex set and 
+where $\mathcal{D}$ is some convex set and
 
 $$
 \begin{align*}
@@ -129,18 +129,19 @@ $$
 \end{align*}
 $$
 
-
 where $\mathcal{I}_{\mathcal{D}}(x)$ is the indicator function on $\mathcal{D}$ which is defined as
 
-$$\mathcal{I}_{\mathcal{D}}(x) = 
+$$
+\mathcal{I}_{\mathcal{D}}(x) =
 
 \begin{cases}
 0 & \text{if} \; x \in \mathcal{D} \\
 \infty & \text{if} \; x \notin \mathcal{D}
 
-\end{cases}$$
+\end{cases}
+$$
 
-However, we cannot directly solve the minimization problem with the indicator function since it is nonsmooth at the boundary of the set $\mathcal{D}$, since it jumps from some finite value to infinity. This primal IPMs seek to replace the indicator function with a smooth approximation called a log-barrier function. This log-barrier function is roughly zero when $x \in \mathcal{D}$ and steeply approches infinity when you approach the boundary of $\mathcal{D}$. 
+However, we cannot directly solve the minimization problem with the indicator function since it is nonsmooth at the boundary of the set $\mathcal{D}$, since it jumps from some finite value to infinity. This primal IPMs seek to replace the indicator function with a smooth approximation called a log-barrier function. This log-barrier function is roughly zero when $x \in \mathcal{D}$ and steeply approches infinity when you approach the boundary of $\mathcal{D}$.
 
 This steepness is controlled by a "barrier parameter." The steeper the barrier function is, the better it approximates the indicator function, but the less smooth and worse conditioned the minimization becomes. Initially the unconstrained problem is solved with a shallow barrier parameter and then is successively solved with steeper and steeper barrier parameters. This barrier can be thought of as a force-field that pushes the iterates away from the boundary of the feasible set and amount that this force field pushes the iterates is controlled by the barrier paramter.
 
@@ -148,17 +149,17 @@ Primal-Dual IPMs take a slightly different approach. They attempt to use Newton'
 
 One large drawback to using IPMs in real-time systems is the fact that they cannot be warmstarted which is a desirable property of real-time solvers.
 
-One example of an IPM is [ECOS](https://github.com/embotech/ecos). 
+One example of an IPM is [ECOS](https://github.com/embotech/ecos).
 
-To learn more about primal IPMs reference Chapter 11 in *Convex Optimization* by Boyd and Vanderberghe and to learn more about primal-dual IPMs reference Chapter 14 and Chapter 16 Section 6 in Nocedal and Wright.
+To learn more about primal IPMs reference Chapter 11 in _Convex Optimization_ by Boyd and Vanderberghe and to learn more about primal-dual IPMs reference Chapter 14 and Chapter 16 Section 6 in Nocedal and Wright.
 
-***
+---
 
 ## First-Order Methods
 
-Both Active Set methods and IPMs typically rely on "second-order" information. Second order information is the information about the curvature of a function which is given by its second derivative, or for the multivariable case its Hessian. Using second order information allows these methods to converge quickly in few iterations, but each iteration requires the factorization of a large matrix which is a very expensive operation. 
+Both Active Set methods and IPMs typically rely on "second-order" information. Second order information is the information about the curvature of a function which is given by its second derivative, or for the multivariable case its Hessian. Using second order information allows these methods to converge quickly in few iterations, but each iteration requires the factorization of a large matrix which is a very expensive operation.
 
-The number of floating point operations for matrix factorization scales with $\mathcal{O}(n^3)$ and storing the Hessian scales with $\mathcal{O}(n^2)$ where $n$ is the number of variables in your problem. 
+The number of floating point operations for matrix factorization scales with $\mathcal{O}(n^3)$ and storing the Hessian scales with $\mathcal{O}(n^2)$ where $n$ is the number of variables in your problem.
 
 First Order methods on the other hand only use first-order information, which is information about the slope of a function which is given by its first derivative, or gradient in the multivariable case. First-order methods do not require matrix factorizations at each iteration and only require Matrix-vector multiplications. The number of floating point operations for matrix-vector multiplication scales with $\mathcal{O}(n^2)$, thus each iteration of a first-order method can be done quicker than an iteration of a second order method, but first order methods require more iterations to converge, since each iteration uses less information.
 
@@ -190,4 +191,4 @@ Advantages: Small code footprint, good for large problems, can be good for mediu
 
 Disadvantages: Highly sensitive to scaling and conditioning so they need scaling and preconditioning
 
-***
+---

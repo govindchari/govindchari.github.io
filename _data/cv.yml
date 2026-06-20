@@ -38,7 +38,6 @@ cv:
         end_date: Sept 2025
         highlights:
           - Large scale optimization in Supply Chain Optimization Technologies (SCOT).
-          - Developed a distributed optimization algorithm for shipment optimization.
 
       - company: Mitsubishi Electric Research Lab
         position: Research Intern
@@ -46,7 +45,7 @@ cv:
         start_date: Sept 2024
         end_date: Dec 2024
         highlights:
-          - Developed a C++ based active set solver for quadratic programs based on a novel homogeneous formulation for infeasibility detection.
+          - Optimization algorithms research hosted by Dr. Arvind Raghunathan.
 
       - company: Anduril Industries
         position: Guidance, Navigation, and Control Intern
@@ -54,8 +53,7 @@ cv:
         start_date: June 2024
         end_date: Sept 2024
         highlights:
-          - Trajectory optimization for a group 5 drone high agility maneuver and [Roadrunner](https://www.anduril.com/roadrunner/) landing guidance.
-          - Prepared and delivered a lecture on trajectory optimization for the flight engineering team (around 85 engineers).
+          - Trajectory optimization for Fury and Roadrunner.
 
       - company: SpaceX
         position: Software Engineering Intern
@@ -63,8 +61,7 @@ cv:
         start_date: June 2023
         end_date: Sept 2023
         highlights:
-          - Developed numerical optimization based beam planning algorithm for [Starlink](https://www.starlink.com/).
-          - Implemented custom convex parser in C++.
+          - Beam planning for Starlink.
 
       - company: SpaceX
         position: Guidance, Navigation, and Control Intern
@@ -72,8 +69,7 @@ cv:
         start_date: June 2022
         end_date: Aug 2022
         highlights:
-          - Ran Monte-Carlo simulations and analysis to assess the impact of altering thruster configuration on [Dragon's](https://www.spacex.com/vehicles/dragon/) entry performance.
-          - Built verification tool to ensure positive propellant margin in all two fault propulsion cases.
+          - Entry guidance analysis for Dragon.
 
       - company: SpaceX
         position: Propulsion Analysis Intern
@@ -81,4 +77,4 @@ cv:
         start_date: June 2021
         end_date: Aug 2021
         highlights:
-          - Performed nonlinear structural and thermal analysis of Raptor and Merlin engine components using ANSYS.
+          - Structural and thermal analysis for Raptor.

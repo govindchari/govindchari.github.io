@@ -1,5 +1,5 @@
 metadata:
-  last_updated: '2026-07-03'
+  last_updated: '2026-07-10'
 papers:
   cSPbpfIAAAAJ:9yKSN-GCB0IC:
     citations: 8
@@ -26,6 +26,6 @@ papers:
     title: Fast monte carlo analysis for 6-dof powered-descent guidance via gpu-accelerated sequential convex programming
     year: '2024'
   cSPbpfIAAAAJ:u5HHmVD_uO8C:
-    citations: 60
+    citations: 61
     title: Real-Time Sequential Conic Optimization for Multi-Phase Rocket Landing Guidance
     year: '2022'

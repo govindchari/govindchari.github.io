@@ -31,6 +31,14 @@ cv:
           - Achieved highest GPA in MechE graduating class.
 
     Experience:
+      - company: Citadel
+        position: Quantitative Researcher
+        location: New York, NY
+        start_date: July 2026
+        end_date: Present
+        # highlights:
+        #   - Large scale optimization in Supply Chain Optimization Technologies (SCOT).
+
       - company: Amazon
         position: Applied Scientist Intern
         location: Bellevue, WA

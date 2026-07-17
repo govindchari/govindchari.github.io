@@ -1,5 +1,5 @@
 metadata:
-  last_updated: '2026-07-10'
+  last_updated: '2026-07-17'
 papers:
   cSPbpfIAAAAJ:9yKSN-GCB0IC:
     citations: 8
@@ -10,7 +10,7 @@ papers:
     title: 'QOCO: a quadratic objective conic optimizer with custom solver generation'
     year: '2026'
   cSPbpfIAAAAJ:WF5omc3nYNoC:
-    citations: 0
+    citations: 1
     title: Optimal Acceleration for Proximal Minimization of the Sum of Convex and Strongly Convex Functions
     year: '2026'
   cSPbpfIAAAAJ:d1gkVwhDpl0C:

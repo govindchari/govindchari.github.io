@@ -1,31 +1,35 @@
 metadata:
-  last_updated: '2026-07-17'
+  last_updated: '2026-08-03'
 papers:
   cSPbpfIAAAAJ:9yKSN-GCB0IC:
-    citations: 8
+    citations: 9
     title: Constraint preconditioning and parameter selection for a first-order primal-dual method applied to model predictive control
     year: '2024'
   cSPbpfIAAAAJ:W7OEmFMy1HYC:
-    citations: 17
+    citations: 20
     title: 'QOCO: a quadratic objective conic optimizer with custom solver generation'
     year: '2026'
   cSPbpfIAAAAJ:WF5omc3nYNoC:
-    citations: 1
-    title: Optimal Acceleration for Proximal Minimization of the Sum of Convex and Strongly Convex Functions
+    citations: 2
+    title: Optimal acceleration for proximal minimization of the sum of convex and strongly convex functions
     year: '2026'
   cSPbpfIAAAAJ:d1gkVwhDpl0C:
-    citations: 9
+    citations: 11
     title: Spacecraft rendezvous guidance via factorization-free sequential convex programming using a first-order method
     year: '2024'
   cSPbpfIAAAAJ:eQOLeE2rZwMC:
-    citations: 0
+    citations: 1
     title: 'QOCO-GPU: A Quadratic Objective Conic Optimizer with GPU Acceleration'
     year: '2026'
   cSPbpfIAAAAJ:u-x6o8ySG0sC:
-    citations: 30
+    citations: 32
     title: Fast monte carlo analysis for 6-dof powered-descent guidance via gpu-accelerated sequential convex programming
     year: '2024'
   cSPbpfIAAAAJ:u5HHmVD_uO8C:
-    citations: 61
+    citations: 63
     title: Real-Time Sequential Conic Optimization for Multi-Phase Rocket Landing Guidance
     year: '2022'
+  cSPbpfIAAAAJ:ufrVoPGSRksC:
+    citations: 0
+    title: Structure-Exploiting and Accelerated Methods for Convex Optimization
+    year: '2026'

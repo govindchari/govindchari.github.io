@@ -1,5 +1,5 @@
 metadata:
-  last_updated: '2026-08-14'
+  last_updated: '2026-08-24'
 papers:
   cSPbpfIAAAAJ:9yKSN-GCB0IC:
     citations: 9
@@ -14,7 +14,7 @@ papers:
     title: Optimal acceleration for proximal minimization of the sum of convex and strongly convex functions
     year: '2026'
   cSPbpfIAAAAJ:d1gkVwhDpl0C:
-    citations: 11
+    citations: 12
     title: Spacecraft rendezvous guidance via factorization-free sequential convex programming using a first-order method
     year: '2024'
   cSPbpfIAAAAJ:eQOLeE2rZwMC:
@@ -22,11 +22,11 @@ papers:
     title: 'QOCO-GPU: A Quadratic Objective Conic Optimizer with GPU Acceleration'
     year: '2026'
   cSPbpfIAAAAJ:u-x6o8ySG0sC:
-    citations: 32
+    citations: 33
     title: Fast monte carlo analysis for 6-dof powered-descent guidance via gpu-accelerated sequential convex programming
     year: '2024'
   cSPbpfIAAAAJ:u5HHmVD_uO8C:
-    citations: 63
+    citations: 65
     title: Real-Time Sequential Conic Optimization for Multi-Phase Rocket Landing Guidance
     year: '2022'
   cSPbpfIAAAAJ:ufrVoPGSRksC:
